@@ -8,11 +8,23 @@ import plotly.express as px
 
 from app import app
 from components import dashboards, sidebar, extratos
+from globals import *
 
 # ============ Layout ============ #
 content = html.Div(id="page-content")
 
 app.layout = dbc.Container(children=[
+# Componentes para armazenar os dados que estão sendo trabalhados na sessão atual ----- 
+    dcc.Store(id='store-receitas',
+              data=df_receitas.to_dict()),
+    dcc.Store(id='store-despesas',
+              data=df_despesas.to_dict()),
+    dcc.Store(id='store-cat-receitas',
+              data=df_cat_receitas.to_dict()),
+    dcc.Store(id='store-cat-despesas',
+              data=df_cat_despesas.to_dict()),
+
+# Componentes de layout da página ---------------------
     dbc.Row([
         dbc.Col([
             dcc.Location(id='url'), 
