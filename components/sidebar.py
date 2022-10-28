@@ -293,7 +293,9 @@ def salve_form_receita(n, descricao, valor, date, switches, categoria, dict_rece
 
         valor = round(float(valor), 2)
         date = pd.to_datetime(date).date()
-        categoria = categoria[0][0]
+        # Duas linhas iguais para tratar casos de lista dentro da lista
+        categoria = categoria[0] if type(categoria) == list else categoria
+        categoria = categoria[0] if type(categoria) == list else categoria
         recebido = 1 if 1 in switches else 0
         fixo = 1 if 2 in switches else 0
 
@@ -328,6 +330,8 @@ def salve_form_despesa(n, descricao, valor, date, switches, categoria, dict_desp
 
         valor = round(float(valor), 2)
         date = pd.to_datetime(date).date()
+        # Duas linhas iguais para tratar casos de lista dentro da lista
+        categoria = categoria[0] if type(categoria) == list else categoria
         categoria = categoria[0] if type(categoria) == list else categoria
         pago = 1 if 1 in switches else 0
         fixo = 1 if 2 in switches else 0

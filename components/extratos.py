@@ -36,3 +36,39 @@ layout = dbc.Col([
 ], style={'padding': '10px'})
 
 # ============ Callbacks ============ #
+@app.callback(
+    Output('tabela-despesas', 'children'),
+    Input('store-despesas', 'data')
+)
+def imprimir_tabela(data):
+    df = pd.DataFrame(data)
+    df["Data"] = pd.to_datetime(df['Data']).dt.date
+    df = df.fillna('-')
+    df.sort_values(by='Data', ascending=False)
+
+    tabela = dash_table.DataTable(df.to_dict('records'), [{'name': i, 'id': i} for i in df.columns])
+
+    return tabela
+
+@app.callback(
+    Output('bar-graph', 'figure'),
+    Input('store-despesas', 'data')
+)
+def bar_chart(data):
+    df = pd.DataFrame(data)
+    df_grouped = df.groupby('Categoria').sum()[['Valor']].reset_index()
+
+    graph = px.bar(df_grouped, x='Categoria', y='Valor', title="Despesas gerais")
+    graph.update_layout(paper_bgcolor='rgba(0, 0, 0, 0)', plot_bgcolor='rgba(0, 0, 0, 0)')
+
+    return graph
+
+@app.callback(
+    Output('valor_despesa_card', 'children'),
+    Input('store-despesas', 'data')
+)
+def display_despesas(data):
+    df = pd.DataFrame(data)
+    valor = df['Valor'].sum()
+
+    return f"R$ {valor}"

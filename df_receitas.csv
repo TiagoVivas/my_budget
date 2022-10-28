@@ -1,2 +1,7 @@
 ,Valor,Efetuado,Fixo,Data,Categoria,Descrição
-0,4000.0,1,1,2022-04-05,Salário,Salário Abril
+0,4000.0,1,1,2022-10-05,Salário,Salário Abril
+1,3200.0,1,0,2022-10-05,Salário,Salário Abril
+7,100.0,1,0,2022-10-27,Investimentos,Comissão
+8,100.0,1,0,2022-10-27,Comissão,Comissão
+9,400.0,1,0,2022-10-14,Investimentos,Dividendos
+5,1.0,1,0,2022-10-27,Salário,teste
